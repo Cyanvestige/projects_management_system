@@ -1,0 +1,35 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Alice"
+    },
+    {
+      "id": 2,
+      "name": "Bob"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "name": "A Project",
+      "personId": 1,
+      "organization": "A Group",
+      "created": 1604989757139
+    },
+    {
+      "id": 2,
+      "name": "B Project",
+      "personId": 2,
+      "organization": "B Group",
+      "created": 1604989757139
+    },
+    {
+      "id": 3,
+      "name": "BB Project",
+      "personId": 2,
+      "organization": "B Group",
+      "created": 1604989757139
+    }
+  ]
+}
