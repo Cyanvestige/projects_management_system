@@ -3,6 +3,7 @@ import { SearchPanel } from "./search-panel";
 import { useEffect, useState } from "react";
 import { List } from "./list";
 import { cleanObject } from "utils";
+import { useMount, useDebounce } from "utils";
 import * as qs from "qs";
 const apiUrl = process.env.REACT_APP_API_URL;
 export const ProjectList = () => {
@@ -11,25 +12,27 @@ export const ProjectList = () => {
     name: "",
     personId: "",
   });
+  const debouncedParam = useDebounce(param, 500);
   const [list, setList] = useState([]);
   useEffect(() => {
     fetch(
       // `${apiUrl}/projects?name=${param.name}&personId=${param.personId}`
-      `${apiUrl}/projects?${qs.stringify(cleanObject(param))}`
+      `${apiUrl}/projects?${qs.stringify(cleanObject(debouncedParam))}`
     ).then(async (res) => {
       if (res.ok) {
         setList(await res.json());
       }
     });
-  }, [param]);
+  }, [debouncedParam]);
 
-  useEffect(() => {
+  // custom hook
+  useMount(() => {
     fetch(`${apiUrl}/users`).then(async (res) => {
       if (res.ok) {
         setUsers(await res.json());
       }
     });
-  }, [param]);
+  });
 
   return (
     <div>
