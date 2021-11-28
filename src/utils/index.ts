@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 // this function is used to clean the keys with empty value, but we should not change the source object
-export const isFalsy = (value: any) => (value === 0 ? false : !value);
+export const isFalsy = (value: unknown) => (value === 0 ? false : !value);
 
 export const cleanObject = (object: object) => {
   const result = { ...object };
@@ -36,7 +36,7 @@ export const useMount = (callback: () => void) => {
 //     }, delay);
 //   };
 // };
-export const useDebounce = (value: any, delay?: number) => {
+export const useDebounce = <V>(value: V, delay?: number) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
   useEffect(() => {
     const timeout = setTimeout(() => setDebouncedValue(value), delay);
