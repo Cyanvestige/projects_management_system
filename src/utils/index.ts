@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 
 // this function is used to clean the keys with empty value, but we should not change the source object
-export const isFalsy = (value) => (value === 0 ? false : !value);
+export const isFalsy = (value: any) => (value === 0 ? false : !value);
 
-export const cleanObject = (object) => {
+export const cleanObject = (object: object) => {
   const result = { ...object };
   Object.keys(result).forEach((key) => {
+    //@ts-ignore
     const value = result[key];
     // we want to check if value is null/false
     //     if (!value) { we want to delete the value when the value is null or undefined
@@ -13,13 +14,14 @@ export const cleanObject = (object) => {
     //       delete result[key];
     //     }
     if (isFalsy(value)) {
+      //@ts-ignore
       delete result[key];
     }
   });
   return result;
 };
 
-export const useMount = (callback) => {
+export const useMount = (callback: () => void) => {
   useEffect(() => {
     callback();
   }, []);
@@ -34,7 +36,7 @@ export const useMount = (callback) => {
 //     }, delay);
 //   };
 // };
-export const useDebounce = (value, delay) => {
+export const useDebounce = (value: any, delay?: number) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
   useEffect(() => {
     const timeout = setTimeout(() => setDebouncedValue(value), delay);
