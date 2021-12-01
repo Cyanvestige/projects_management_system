@@ -44,3 +44,25 @@ export const useDebounce = <V>(value: V, delay?: number) => {
   }, [value, delay]);
   return debouncedValue;
 };
+
+export const useArray = <T>(array: T[]) => {
+  const [value, setValue] = useState(array);
+  // const clear = ;
+  // const removeIndex = (index: number) => {
+  //   setValue(value.filter((v, inx) => inx != index));
+  // };
+  // const add = (ele: V) => {
+  //   value.push(ele);
+  // };
+  // useEffect(() => {
+  //   setValue(value);
+  // }, []);
+  return {
+    value,
+    setValue,
+    add: (ele: T) => setValue([...value, ele]),
+    clear: () => setValue([]),
+    removeIndex: (index: number) =>
+      setValue(value.filter((v, inx) => inx != index)),
+  };
+};
